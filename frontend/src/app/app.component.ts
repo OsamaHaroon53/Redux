@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgRedux } from '@angular-redux/store';
+import { NgRedux, select } from '@angular-redux/store';
 import { IAppState } from './store';
 import { INCREMENT } from "./action";
 
@@ -10,12 +10,8 @@ import { INCREMENT } from "./action";
 })
 export class AppComponent {
   title = 'app';
-  count = 0;
+  @select() count;
   constructor(private ngRedux: NgRedux<IAppState>) {
-    ngRedux.subscribe(() => {
-      var store = ngRedux.getState();
-      this.count = store.count;
-    })
   }
   inc() {
     // this.count++;
