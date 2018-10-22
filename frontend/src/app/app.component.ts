@@ -10,11 +10,16 @@ import { INCREMENT } from "./action";
 })
 export class AppComponent {
   title = 'app';
-  @select() count;
-  constructor(private ngRedux: NgRedux<IAppState>) {
-  }
-  inc() {
+  @select() count; //same name
+  @select('count') counter; //If name change
+  @select(['messages','newmessage']) newmessage; //complex property
+  @select((s: IAppState)=>s.messages.newmessage) messageCount;
+
+  constructor(private ngRedux: NgRedux<IAppState>) {}
+
+  increment() {
     // this.count++;
     this.ngRedux.dispatch({ type: INCREMENT });
   }
+
 }
